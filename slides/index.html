@@ -1,0 +1,291 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Aumentando a produtividade com o {LESS}</title>
+
+		<meta name="description" content="Talk: Aumentando a produtividade com o {LESS}">
+		<meta name="author" content="Lucas Cavalcanti">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script>
+			// If the query includes 'print-pdf' we'll use the PDF print sheet
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		
+		<style type="text/css">
+		.state-background{background-color:#fff;}
+		.reveal h1, .reveal h2, .reveal p{color:#000;}
+		*{color:#000;}
+		.reveal pre, pre code{background-color: #000;}
+		.params, .function{color:white;}
+		</style>
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<br/><br/><br/>
+					<h1>Event Tracking Google Analytics</h1>
+				</section>
+				
+				<section>
+					<h2>Lucas Cavalcanti</h2>
+					<p>Front-end Engineer<br/>
+					<p>at: <a href="http://mgrtech.com.br/" target="_blank">MGR Tech</a></p>
+					<p>
+					    <img src="lib/img/foto.jpg" alt="" />
+					</p>
+				</section>
+				
+				<section>
+						<h2>O que veremos:</h2>
+						<ol>
+							<li>O que é o GA?</li>
+							<li>O que é Event Tracking?</li>
+							<li>Vantagens</li>
+							<li>Como configurar?</li>
+							<li>Utilizando o _trackPageview</li>
+							<li>Utilizando o _trackEvent</li>
+							<li>Tracking Scroll Page</li>
+							<li>Tracking nas Redes Sociais</li>
+							<li>Como testar?</li>
+						</ol>
+				</section>
+				<section>
+					<h2>O que é GA?</h2>
+					<p>Ferramenta do Google de análise de sites.</p>
+				</section>
+				<section>
+					<h2>O que é o Event Tracking?</h2>
+					<p>Event Tracking ( Rastreamento de Evento ) é um método do GA de rastreamento de código, que pode-se usar para registrar eventos do usuário fazendo interações com a página, possibilitando ter uma análise geral de como o usuário usou o seu site.</p>
+				</section>
+				<section>
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<h1>Vantagens</h1>
+				</section>
+				<section data-markdown>
+					<h2>Configurando</h2>
+					<p>Basta utilizar o código que o GA disponibiliza, e colocar no Head</p>
+					<pre>
+						<code class="javascript">
+							var _gaq = _gaq || [];
+						    _gaq.push(['_setAccount', 'UA-xxxxxxx-xx']);
+						    _gaq.push(['_trackPageview']);
+						    (function() {
+						        var ga = document.createElement('script');
+						 		ga.type = 'text/javascript'; ga.async = true;
+						        ga.src = ('https:' == document.location.protocol
+						 		? 'https://ssl' : 'http://www')
+						 		+ '.google-analytics.com/ga.js';
+						        var s = document.getElementsByTagName('script')[0];
+						 		s.parentNode.insertBefore(ga, s);
+						    })();
+						</code>
+					</pre>
+				</section>
+				<section data-markdown>
+					<h2>_trackPageview</h2>
+					O _trackPageview é um metódo do GA<br/> que captura um evento de page view.<br/>
+					Por padrao o código do GA, já vem com<br/> um _trackPageview.
+					O pageview recebe 1 parâmetro, não obrigatório, que é a URL
+				</section>
+				<section data-markdown>
+					<h2>_trackPageview</h2>
+					Exemplo:
+					<pre>
+					<code class="javascript">
+					
+					_gaq.push(['_trackPageview', '/lucascavalcanti/blog/portfolio']);
+					
+					</code>
+					</pre>
+				</section>
+
+				<section data-markdown>
+					<h2>_trackEvent</h2>
+					O _trackEvent também é um metódo do GA, ele captura qualquer evento.<br/>
+					O _trackEvent tem dois parâmetros obrigatórios que é a categoria e ação.<br/>
+					Mas possui mais parâmetros como o label e value.
+				</section>
+				<section data-markdown>
+					<h2>_trackEvent</h2>
+					Exemplo:
+					<pre>
+					<code class="javascript">
+					
+					_gaq.push(['_trackEvent', 'Videos', 'Play', 'Video_Principal']);
+					
+					</code>
+					</pre>
+				</section>
+				<section data-markdown>
+					<h2>Tracking Scroll Page</h2>
+					
+					<pre>
+					<code class="javascript" style="margin-top: 20px;">
+					function ScrollPx ( ) {
+						// pega a altura da janela e a posicao do scroll relacionado ao topo da janela.
+						var bottom_px = jQuery(window).height() + jQuery(window).scrollTop();
+						return bottom_px;
+					}
+
+					jQuery(window).scroll(function(){
+						var scrollPx = ScrollPx();
+						// flags
+						var flag_px_800 = 0,
+							flag_px_1200 = 0;
+
+						if(scrollPx >= 800 && scrollPercent <= 900){
+							if(flag_px_800 == 0){
+								flag_px_800 = 1;
+								_gaq.push(['_trackEvent', 'scroll', '800px']);     }
+							}
+							else if(scrollPercent > 1200){
+								if(flag_px_1200 == 0){
+									flag_px_1200 = 1;
+									_gaq.push(['_trackEvent', 'scroll', '1200px']);       
+								}
+							}
+						});
+					</code>
+					</pre>
+				</section>
+				<section data-markdown>
+					<h2>Tracking Redes Sociais</h2>
+					Podemos "trackear" quantos likes e quantos retweets foram feitos...
+				</section>
+				<section>
+					<img src="lib/img/cool.png" width="500" height="auto" alt="Cool">
+				</section>
+				<section data-markdown>
+					<h2>Tracking Redes Sociais</h2>
+					Facebook
+					<pre>
+				    <code class="javascript">
+					window.fbAsyncInit = function() {
+					//like
+					FB.Event.subscribe('edge.create', function(UrlLink) {
+						_gaq.push(['_trackEvent', 'facebook', 'like',UrlLink]);
+					});
+					
+					//unlike
+					FB.Event.subscribe('edge.remove', function(targetUrl) {
+						_gaq.push(['_trackEvent', 'facebook', 'unlike', targetUrl]);
+					});
+					
+					//send
+					FB.Event.subscribe('message.send', function(targetUrl) {
+						_gaq.push(['_trackEvent', 'facebook', 'send',targetUrl]);
+					});
+					}
+				    </code>
+					</pre>
+				</section>
+				<section data-markdown>
+					<h2>Tracking Redes Sociais</h2>
+					Twitter
+					<pre>
+				    <code class="javascript">
+					// tweet
+					twttr.events.bind('tweet', function(){
+						_gaq.push(['_trackEvent', 'twitter', 'tweet']);
+					});
+
+					// retweet
+					twttr.events.bind('retweet', function(){
+						_gaq.push(['_trackEvent', 'twitter', 'retweet']);
+					});
+
+					// follow
+					twttr.events.bind('follow', function(){
+						_gaq.push(['_trackEvent', 'twitter', 'follow']);
+					});
+				    </code>
+					</pre>
+				</section>
+				<section>
+					<br />
+					<br />
+					<br />
+					<h1>E como a gente testa?</h1>
+				</section>
+				<section>
+					<h2>E como a gente testa?</h2>
+					<p style="font-size:28px">Plugin do Google Chrome:</p>
+					<a href="https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna" target="_blank">Google Analytics Debugger (by Google)</a>
+					<br/><br/>
+					<p style="font-size:28px">Plugin para o Firefox:</p>
+					<a href="http://www.keithclark.co.uk/labs/google-analytics-debugger/" target="_blank">Google Analytics Debugger</a>
+				</section>
+				<section>
+					<br />
+					<br />
+					<br />
+					<h2>Valeuuu feras!<br/></h2><br/>
+					<a href="https://www.facebook.com/lucas.cavalcantimeloqueiroz" target="_blank">https://facebook.com/lucas.cavalcantimeloqueiroz</a>
+					<br/>
+					<a href="http://lucascavalcanti.com.br/" target="_blank">http://lucascavalcanti.com.br/</a>
+					<br>
+					<a href="https://github.com/lucascmelo" target="_blank">https://github.com/lucascmelo</a>
+					
+				</section>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				
+				theme: Reveal.getQueryHash().theme || 'default', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+				]
+			});
+			
+		</script>
+
+	</body>
+</html>

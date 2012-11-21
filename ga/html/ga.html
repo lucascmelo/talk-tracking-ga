@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Tracking Google Analytics</title>
+		<style type="text/css">
+			#all{width:1024px;height:2000px;margin:0 auto;position:absolute;left:50%;margin:0 0 0 -512px;font:arial;}
+			#conteudo{width:800px;padding-bottom:200px;position:absolute;left:210px}
+			nav{width:100%;display:inline-block;margin-bottom:40px}
+			nav li, nav a{float:left;display:inline-block;margin:0 20px}
+		</style>
+		
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-18191345-14']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+		<script src="http://www.google.com/jsapi"></script>
+
+		<script src="../js/jquery-1.7.1.min.js"></script>
+		<script src="../js/util.js"></script>
+	</head>
+	<body>
+		<div id="fb-root"></div>
+		<script>
+		window.fbAsyncInit = function() {
+		    Init.facebook.setup();
+		    
+		  };
+		
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=166877213443526";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		</script>
+		
+		<script type="text/javascript" charset="utf-8">
+		  window.twttr = (function (d,s,id) {
+		    var t, js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+		    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+		    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+		  }(document, "script", "twitter-wjs"));
+		</script>
+		
+		<div id="all">  
+			<div id="conteudo">
+				<nav>
+					<ol>
+						<li>
+							<a href="#menu_1">Menu 1</a>
+						</li>
+						<li>
+							<a href="#menu_2">Menu 2</a>
+						</li>
+						<li>
+							<a href="#menu_3">Menu 3</a>
+						</li>
+					</ol>
+				</nav>
+				
+				<div class="fb-like" data-href="https://developers.facebook.com/docs/reference/plugins/like/" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div>
+			
+				<br/><br/>
+			
+				<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><br/>
+				<a href="https://twitter.com/google" class="twitter-follow-button" data-show-count="false">Follow</a>
+			</div>
+</div>
+</body>
+
+
+</html>
