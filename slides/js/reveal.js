@@ -352,9 +352,9 @@ var Reveal = (function(){
 			// n, page down
 			case 78: case 34: navigateNext(); triggered = true; break;
 			// h, left
-			case 72: case 37: navigateLeft(); triggered = true; break;
+			case 72: case 37: case 81: case 87: case 82: case 65: case 83: case 68: navigateLeft(); triggered = true; break;
 			// l, right
-			case 76: case 39: navigateRight(); triggered = true; break;
+			case 76: case 39: case 80: case 79: case 73: case 85: case 74: case 75: case 76: navigateRight(); triggered = true; break;
 			// k, up
 			case 75: case 38: navigateUp(); triggered = true; break;
 			// j, down
